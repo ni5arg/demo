@@ -41,11 +41,20 @@ public class CsvToProtobufConverter {
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
+                    continue;
                 }
 
                 // Populate the proto fields
                 int serial = Integer.parseInt(line[0]);
-                int[] date = dateValidator(line[1]);
+                //try{
+                int[] date;
+                try{
+                    date = dateValidator(line[1]);
+                }
+                catch (dateException e){
+                    e.printStackTrace();
+                    continue;
+                }
                 String type = line[2];
                 Integer[] finalValues = valueValidator(type, valueArray);
 
@@ -125,9 +134,9 @@ public class CsvToProtobufConverter {
                 throw new dateException("Date is not in the past.");
             }
         } 
-        catch (dateException e){
-            e.printStackTrace();
-        }
+        // catch (dateException e){
+        //     e.printStackTrace();
+        // }
         catch (NumberFormatException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
