@@ -3,9 +3,7 @@ package com.example;
 import com.example.Schema.Employee;
 import com.example.Schema.Employee.CalendarDate;
 import com.google.protobuf.Message;
-//import com.example.DeviceDataProto.DeviceData;
 import com.opencsv.CSVReader;
-
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.text.ParseException;
@@ -20,26 +18,13 @@ import java.util.ArrayList; // import the ArrayList class
 public class CsvToProtobufConverter {
 
     public static void main(String[] args) throws Exception {
-        // System.out.println(dateValidator("2024-09-15"));
-        // System.out.println(dateValidator("2024-09-19"));
-        // System.out.println(dateValidator("2024-09-23"));
-        // System.out.println(dateValidator("2024-10-15"));
-
-        // System.out.println(dateValidator("2023-09-15"));
-        // System.out.println(dateValidator("2025-09-19"));
-        System.out.println(dateValidator("2024-09-15"));
 
         String csvFile = "./test-data/Employee Data.txt";
-
 
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             reader.skip(1);//skip the header line
             
-            System.out.println("Read the csv file");
-            
             String[] line;
-            
-
             while ((line = reader.readNext()) != null) {
                 
                 String fullEntry = String.join(",", line);
@@ -49,28 +34,30 @@ public class CsvToProtobufConverter {
                 String[] values = valueString.split(",");
                 int[] valueArray = new int[values.length];
                 try {
-                    for(int i=0; i <= values.length; i++) {
+                    for(int i=0; i < values.length; i++) {
                         valueArray[i] = Integer.parseInt(values[i]);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
+                // Populate the proto fields
                 int serial = Integer.parseInt(line[0]);
                 int[] date = dateValidator(line[1]);
                 String type = line[2];
                 Integer[] finalValues = valueValidator(type, valueArray);
 
-                // Create User protobuf object
+                // Create Date protobuf object
                 CalendarDate dateExample =  CalendarDate.newBuilder()
                                         .setYear(date[0])
                                         .setMonth(date[1])
                                         .setDay(date[2])
                                         .build();
 
-
+                // Create Values protobuf object
                 List<Integer> list = Arrays.asList(finalValues);
 
+                // Create Employee protobuf object
                 Employee employee = Employee.newBuilder()
                                     .setSerial(serial)
                                     .setDate(dateExample)
@@ -78,16 +65,13 @@ public class CsvToProtobufConverter {
                                     .addAllValues(list)
                                     .build();
 
-                users.add(user);
-
+                // Messaging
+                byte[] protobufData = employee.toByteArray();
+                sendToCloudService(protobufData);
             }
 
         }
     }
-
-    // private static List<Float> parseValues(String[] record) {
-    //     // Parse and return values as Float list
-    // }
 
     private static Integer[] valueValidator(String type, int[] values) {
         // TODO Auto-generated method stub
