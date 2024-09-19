@@ -110,7 +110,7 @@ public class CsvToProtobufConverter {
         return numbers;
     }
 
-    private static int[] dateValidator(String dateString) {
+    private static int[] dateValidator(String dateString) throws dateException {
         // TODO Auto-generated method stub
 
         int[] date = new int[3];
@@ -121,12 +121,17 @@ public class CsvToProtobufConverter {
                 date[1] = Integer.parseInt(dateString.split("-")[1]);
                 date[2] = Integer.parseInt(dateString.split("-")[2]);
             }
+            else{
+                throw new dateException("Date is not in the past.");
+            }
         } catch (NumberFormatException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            System.out.println("format error");
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            System.out.println("parsing error");
         }
         return date;
     }
