@@ -4,6 +4,8 @@ import com.example.Schema.Employee;
 import com.example.Schema.Employee.CalendarDate;
 import com.google.protobuf.Message;
 import com.opencsv.CSVReader;
+
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.text.ParseException;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList; // import the ArrayList class
+import com.google.protobuf.util.JsonFormat;  // For converting protobuf to JSON
 
 public class CsvToProtobufConverter {
 
@@ -68,6 +71,19 @@ public class CsvToProtobufConverter {
                 // Messaging
                 byte[] protobufData = employee.toByteArray();
                 sendToCloudService(protobufData);
+
+                try (FileOutputStream fos = new FileOutputStream("./outputData/protobuf")) {
+                    fos.write(protobufData);
+                    //fos.close(); There is no more need for this line since you had created the instance of "fos" inside the try. And this will automatically close the OutputStream
+                }
+
+                //Sanity check
+                // Convert protobuf message to JSON
+                String jsonString = JsonFormat.printer().includingDefaultValueFields().print(employee);
+
+                // Output the JSON string
+                System.out.println("Protobuf as JSON:");
+                System.out.println(jsonString);
             }
 
         }
