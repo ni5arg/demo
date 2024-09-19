@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
+import java.util.ArrayList; // import the ArrayList class
 
 public class CsvToProtobufConverter {
 
@@ -58,7 +59,7 @@ public class CsvToProtobufConverter {
                 int serial = Integer.parseInt(line[0]);
                 int[] date = dateValidator(line[1]);
                 String type = line[2];
-                int[] finalValues = valueValidator(type, valueArray);
+                Integer[] finalValues = valueValidator(type, valueArray);
 
                 // Create User protobuf object
                 CalendarDate dateExample =  CalendarDate.newBuilder()
@@ -67,14 +68,17 @@ public class CsvToProtobufConverter {
                                         .setDay(date[2])
                                         .build();
 
-                // Employee employee = Employee.newBuilder()
-                //                     .setSerial(serial)
-                //                     .setDate(dateExample)
-                //                     .setType(type)
-                //                     .setValues(finalValues)
-                //                     .build();
 
-                // users.add(user);
+                List<Integer> list = Arrays.asList(finalValues);
+
+                Employee employee = Employee.newBuilder()
+                                    .setSerial(serial)
+                                    .setDate(dateExample)
+                                    .setType(type)
+                                    .addAllValues(list)
+                                    .build();
+
+                users.add(user);
 
             }
 
@@ -85,7 +89,7 @@ public class CsvToProtobufConverter {
     //     // Parse and return values as Float list
     // }
 
-    private static int[] valueValidator(String type, int[] values) {
+    private static Integer[] valueValidator(String type, int[] values) {
         // TODO Auto-generated method stub
         if(type == "Summary ") {
             if(values.length != 3){
@@ -97,7 +101,14 @@ public class CsvToProtobufConverter {
                 throw new java.lang.Error("Detail values are incorrect.");
             }
         }
-        return values;
+        // convert to iterables for later
+        Integer[] numbers = new Integer[values.length];
+        int i = 0;
+        for (int value : values) {
+            numbers[i++] = Integer.valueOf(value);
+        }
+
+        return numbers;
     }
 
     private static int[] dateValidator(String dateString) {
