@@ -31,7 +31,6 @@ public class CsvToProtobufConverter {
             while ((line = reader.readNext()) != null) {
                 
                 String fullEntry = String.join(",", line);
-                System.out.println(fullEntry);
 
                 String valueString = fullEntry.substring(fullEntry.indexOf("[", 0)+1, fullEntry.indexOf("]", 0));
                 String[] values = valueString.split(",");
