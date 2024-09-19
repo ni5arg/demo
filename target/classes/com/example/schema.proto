@@ -2,9 +2,19 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
+
+
 message Employee {
   int32 serial = 1;
-  google.protobuf.Timestamp date = 2;
+
+  message Date {
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+  }
+
+  Date date = 2;
+  
   string type = 3;
   int32 values = 4;
 }

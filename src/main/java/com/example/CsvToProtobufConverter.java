@@ -1,30 +1,43 @@
 package com.example;
 
+import com.example.Schema.Employee;
 import com.google.protobuf.Message;
 //import com.example.DeviceDataProto.DeviceData;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;
+import java.io.PrintStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 
 public class CsvToProtobufConverter {
 
     public static void main(String[] args) throws Exception {
+        System.out.println(dateValidator("2024-09-15"));
+        System.out.println(dateValidator("2024-09-19"));
+        System.out.println(dateValidator("2024-09-23"));
+        System.out.println(dateValidator("2024-10-15"));
+
+        System.out.println(dateValidator("2023-09-15"));
+        System.out.println(dateValidator("2025-09-19"));
+
+
         String csvFile = "./test-data/Employee Data.txt";
 
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             reader.skip(1);//skip the header line
 
-            //List<String[]> records = reader.readAll();
             System.out.println("Read the csv file");
             
             String[] line;
             while ((line = reader.readNext()) != null) {
                 
                 int serial = Integer.parseInt(line[0]);
-
+                //String[] date = line[1].split("-");
                 // LocalDate date = LocalDate.parse(line[1]);
                 // final Instant instant = java.sql.Timestamp.valueOf(date.atStartOfDay()).toInstant();        
                 // Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
@@ -34,13 +47,13 @@ public class CsvToProtobufConverter {
                 String email = line[2];
 
                 // Create User protobuf object
-                User user = User.newBuilder()
-                                .setName(name)
-                                .setAge(age)
-                                .setEmail(email)
-                                .build();
+                // Employee employee = Employee.newBuilder()
+                //                 .setSerial(serial)
+                //                 .setAge(age)
+                //                 .setEmail(email)
+                //                 .build();
 
-                users.add(user);
+                // users.add(user);
             }
             // for (String[] record : records) {
             //     DeviceData deviceData = DeviceData.newBuilder()
@@ -61,30 +74,11 @@ public class CsvToProtobufConverter {
     //     // Parse and return values as Float list
     // }
 
-    private static void dateValidator(String date) {
+    private static boolean dateValidator(String date) throws ParseException {
         // TODO Auto-generated method stub
-        String[] args = date.replace("[A-Za-z ]","").split("-");
-        if (args[0].length() != 4){
-            throw new java.lang.Error("The date format is incorrect.");
-        }
-        if (args[1].length() == 2 ){
-            int month = Integer.parseInt(args[1]);
-            if (month < 1 || month > 12){
-                throw new java.lang.Error("The date format is incorrect.");
-            }
-        }
-        else{
-            throw new java.lang.Error("The date format is incorrect.");
-        }
-        if (args[2].length() == 2 ){
-            int day = Integer.parseInt(args[2]);
-            if (day < 1 || day > 31){
-                throw new java.lang.Error("The date format is incorrect.");
-            }
-        }
-        else{
-            throw new java.lang.Error("The date format is incorrect.");
-        }
+        //return new SimpleDateFormat("yyyy-mm-dd").parse(date).compareTo(new Date()); // must be -1 for the date to be valid i.e in the past
+        //Date d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date).before(new Date());
     }
 
     private static void sendToCloudService(byte[] protobufData) {

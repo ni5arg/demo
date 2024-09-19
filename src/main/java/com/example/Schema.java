@@ -35,19 +35,19 @@ public final class Schema {
     int getSerial();
 
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      * @return Whether the date field is set.
      */
     boolean hasDate();
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      * @return The date.
      */
-    com.google.protobuf.Timestamp getDate();
+    Schema.Employee.Date getDate();
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      */
-    com.google.protobuf.TimestampOrBuilder getDateOrBuilder();
+    Schema.Employee.DateOrBuilder getDateOrBuilder();
 
     /**
      * <code>string type = 3;</code>
@@ -105,6 +105,584 @@ public final class Schema {
               Schema.Employee.class, Schema.Employee.Builder.class);
     }
 
+    public interface DateOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:Employee.Date)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>int32 year = 1;</code>
+       * @return The year.
+       */
+      int getYear();
+
+      /**
+       * <code>int32 month = 2;</code>
+       * @return The month.
+       */
+      int getMonth();
+
+      /**
+       * <code>int32 day = 3;</code>
+       * @return The day.
+       */
+      int getDay();
+    }
+    /**
+     * Protobuf type {@code Employee.Date}
+     */
+    public static final class Date extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:Employee.Date)
+        DateOrBuilder {
+    private static final long serialVersionUID = 0L;
+      static {
+        com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+          com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+          /* major= */ 4,
+          /* minor= */ 28,
+          /* patch= */ 2,
+          /* suffix= */ "",
+          Date.class.getName());
+      }
+      // Use Date.newBuilder() to construct.
+      private Date(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+      }
+      private Date() {
+      }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return Schema.internal_static_Employee_Date_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return Schema.internal_static_Employee_Date_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                Schema.Employee.Date.class, Schema.Employee.Date.Builder.class);
+      }
+
+      public static final int YEAR_FIELD_NUMBER = 1;
+      private int year_ = 0;
+      /**
+       * <code>int32 year = 1;</code>
+       * @return The year.
+       */
+      @java.lang.Override
+      public int getYear() {
+        return year_;
+      }
+
+      public static final int MONTH_FIELD_NUMBER = 2;
+      private int month_ = 0;
+      /**
+       * <code>int32 month = 2;</code>
+       * @return The month.
+       */
+      @java.lang.Override
+      public int getMonth() {
+        return month_;
+      }
+
+      public static final int DAY_FIELD_NUMBER = 3;
+      private int day_ = 0;
+      /**
+       * <code>int32 day = 3;</code>
+       * @return The day.
+       */
+      @java.lang.Override
+      public int getDay() {
+        return day_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (year_ != 0) {
+          output.writeInt32(1, year_);
+        }
+        if (month_ != 0) {
+          output.writeInt32(2, month_);
+        }
+        if (day_ != 0) {
+          output.writeInt32(3, day_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (year_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, year_);
+        }
+        if (month_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, month_);
+        }
+        if (day_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, day_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof Schema.Employee.Date)) {
+          return super.equals(obj);
+        }
+        Schema.Employee.Date other = (Schema.Employee.Date) obj;
+
+        if (getYear()
+            != other.getYear()) return false;
+        if (getMonth()
+            != other.getMonth()) return false;
+        if (getDay()
+            != other.getDay()) return false;
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + YEAR_FIELD_NUMBER;
+        hash = (53 * hash) + getYear();
+        hash = (37 * hash) + MONTH_FIELD_NUMBER;
+        hash = (53 * hash) + getMonth();
+        hash = (37 * hash) + DAY_FIELD_NUMBER;
+        hash = (53 * hash) + getDay();
+        hash = (29 * hash) + getUnknownFields().hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static Schema.Employee.Date parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static Schema.Employee.Date parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static Schema.Employee.Date parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static Schema.Employee.Date parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static Schema.Employee.Date parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static Schema.Employee.Date parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static Schema.Employee.Date parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input);
+      }
+      public static Schema.Employee.Date parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public static Schema.Employee.Date parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+
+      public static Schema.Employee.Date parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static Schema.Employee.Date parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input);
+      }
+      public static Schema.Employee.Date parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(Schema.Employee.Date prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code Employee.Date}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:Employee.Date)
+          Schema.Employee.DateOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return Schema.internal_static_Employee_Date_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return Schema.internal_static_Employee_Date_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  Schema.Employee.Date.class, Schema.Employee.Date.Builder.class);
+        }
+
+        // Construct using Schema.Employee.Date.newBuilder()
+        private Builder() {
+
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          bitField0_ = 0;
+          year_ = 0;
+          month_ = 0;
+          day_ = 0;
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return Schema.internal_static_Employee_Date_descriptor;
+        }
+
+        @java.lang.Override
+        public Schema.Employee.Date getDefaultInstanceForType() {
+          return Schema.Employee.Date.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public Schema.Employee.Date build() {
+          Schema.Employee.Date result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public Schema.Employee.Date buildPartial() {
+          Schema.Employee.Date result = new Schema.Employee.Date(this);
+          if (bitField0_ != 0) { buildPartial0(result); }
+          onBuilt();
+          return result;
+        }
+
+        private void buildPartial0(Schema.Employee.Date result) {
+          int from_bitField0_ = bitField0_;
+          if (((from_bitField0_ & 0x00000001) != 0)) {
+            result.year_ = year_;
+          }
+          if (((from_bitField0_ & 0x00000002) != 0)) {
+            result.month_ = month_;
+          }
+          if (((from_bitField0_ & 0x00000004) != 0)) {
+            result.day_ = day_;
+          }
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof Schema.Employee.Date) {
+            return mergeFrom((Schema.Employee.Date)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(Schema.Employee.Date other) {
+          if (other == Schema.Employee.Date.getDefaultInstance()) return this;
+          if (other.getYear() != 0) {
+            setYear(other.getYear());
+          }
+          if (other.getMonth() != 0) {
+            setMonth(other.getMonth());
+          }
+          if (other.getDay() != 0) {
+            setDay(other.getDay());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 8: {
+                  year_ = input.readInt32();
+                  bitField0_ |= 0x00000001;
+                  break;
+                } // case 8
+                case 16: {
+                  month_ = input.readInt32();
+                  bitField0_ |= 0x00000002;
+                  break;
+                } // case 16
+                case 24: {
+                  day_ = input.readInt32();
+                  bitField0_ |= 0x00000004;
+                  break;
+                } // case 24
+                default: {
+                  if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                    done = true; // was an endgroup tag
+                  }
+                  break;
+                } // default:
+              } // switch (tag)
+            } // while (!done)
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.unwrapIOException();
+          } finally {
+            onChanged();
+          } // finally
+          return this;
+        }
+        private int bitField0_;
+
+        private int year_ ;
+        /**
+         * <code>int32 year = 1;</code>
+         * @return The year.
+         */
+        @java.lang.Override
+        public int getYear() {
+          return year_;
+        }
+        /**
+         * <code>int32 year = 1;</code>
+         * @param value The year to set.
+         * @return This builder for chaining.
+         */
+        public Builder setYear(int value) {
+
+          year_ = value;
+          bitField0_ |= 0x00000001;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int32 year = 1;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearYear() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          year_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private int month_ ;
+        /**
+         * <code>int32 month = 2;</code>
+         * @return The month.
+         */
+        @java.lang.Override
+        public int getMonth() {
+          return month_;
+        }
+        /**
+         * <code>int32 month = 2;</code>
+         * @param value The month to set.
+         * @return This builder for chaining.
+         */
+        public Builder setMonth(int value) {
+
+          month_ = value;
+          bitField0_ |= 0x00000002;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int32 month = 2;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearMonth() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          month_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private int day_ ;
+        /**
+         * <code>int32 day = 3;</code>
+         * @return The day.
+         */
+        @java.lang.Override
+        public int getDay() {
+          return day_;
+        }
+        /**
+         * <code>int32 day = 3;</code>
+         * @param value The day to set.
+         * @return This builder for chaining.
+         */
+        public Builder setDay(int value) {
+
+          day_ = value;
+          bitField0_ |= 0x00000004;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int32 day = 3;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearDay() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          day_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:Employee.Date)
+      }
+
+      // @@protoc_insertion_point(class_scope:Employee.Date)
+      private static final Schema.Employee.Date DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new Schema.Employee.Date();
+      }
+
+      public static Schema.Employee.Date getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<Date>
+          PARSER = new com.google.protobuf.AbstractParser<Date>() {
+        @java.lang.Override
+        public Date parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          Builder builder = newBuilder();
+          try {
+            builder.mergeFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(builder.buildPartial());
+          } catch (com.google.protobuf.UninitializedMessageException e) {
+            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                .setUnfinishedMessage(builder.buildPartial());
+          }
+          return builder.buildPartial();
+        }
+      };
+
+      public static com.google.protobuf.Parser<Date> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Date> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public Schema.Employee.Date getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
     private int bitField0_;
     public static final int SERIAL_FIELD_NUMBER = 1;
     private int serial_ = 0;
@@ -118,9 +696,9 @@ public final class Schema {
     }
 
     public static final int DATE_FIELD_NUMBER = 2;
-    private com.google.protobuf.Timestamp date_;
+    private Schema.Employee.Date date_;
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      * @return Whether the date field is set.
      */
     @java.lang.Override
@@ -128,19 +706,19 @@ public final class Schema {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      * @return The date.
      */
     @java.lang.Override
-    public com.google.protobuf.Timestamp getDate() {
-      return date_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : date_;
+    public Schema.Employee.Date getDate() {
+      return date_ == null ? Schema.Employee.Date.getDefaultInstance() : date_;
     }
     /**
-     * <code>.google.protobuf.Timestamp date = 2;</code>
+     * <code>.Employee.Date date = 2;</code>
      */
     @java.lang.Override
-    public com.google.protobuf.TimestampOrBuilder getDateOrBuilder() {
-      return date_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : date_;
+    public Schema.Employee.DateOrBuilder getDateOrBuilder() {
+      return date_ == null ? Schema.Employee.Date.getDefaultInstance() : date_;
     }
 
     public static final int TYPE_FIELD_NUMBER = 3;
@@ -610,31 +1188,31 @@ public final class Schema {
         return this;
       }
 
-      private com.google.protobuf.Timestamp date_;
+      private Schema.Employee.Date date_;
       private com.google.protobuf.SingleFieldBuilder<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> dateBuilder_;
+          Schema.Employee.Date, Schema.Employee.Date.Builder, Schema.Employee.DateOrBuilder> dateBuilder_;
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        * @return Whether the date field is set.
        */
       public boolean hasDate() {
         return ((bitField0_ & 0x00000002) != 0);
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        * @return The date.
        */
-      public com.google.protobuf.Timestamp getDate() {
+      public Schema.Employee.Date getDate() {
         if (dateBuilder_ == null) {
-          return date_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : date_;
+          return date_ == null ? Schema.Employee.Date.getDefaultInstance() : date_;
         } else {
           return dateBuilder_.getMessage();
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
-      public Builder setDate(com.google.protobuf.Timestamp value) {
+      public Builder setDate(Schema.Employee.Date value) {
         if (dateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -648,10 +1226,10 @@ public final class Schema {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
       public Builder setDate(
-          com.google.protobuf.Timestamp.Builder builderForValue) {
+          Schema.Employee.Date.Builder builderForValue) {
         if (dateBuilder_ == null) {
           date_ = builderForValue.build();
         } else {
@@ -662,13 +1240,13 @@ public final class Schema {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
-      public Builder mergeDate(com.google.protobuf.Timestamp value) {
+      public Builder mergeDate(Schema.Employee.Date value) {
         if (dateBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
             date_ != null &&
-            date_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+            date_ != Schema.Employee.Date.getDefaultInstance()) {
             getDateBuilder().mergeFrom(value);
           } else {
             date_ = value;
@@ -683,7 +1261,7 @@ public final class Schema {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
       public Builder clearDate() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -696,33 +1274,33 @@ public final class Schema {
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
-      public com.google.protobuf.Timestamp.Builder getDateBuilder() {
+      public Schema.Employee.Date.Builder getDateBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getDateFieldBuilder().getBuilder();
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
-      public com.google.protobuf.TimestampOrBuilder getDateOrBuilder() {
+      public Schema.Employee.DateOrBuilder getDateOrBuilder() {
         if (dateBuilder_ != null) {
           return dateBuilder_.getMessageOrBuilder();
         } else {
           return date_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : date_;
+              Schema.Employee.Date.getDefaultInstance() : date_;
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp date = 2;</code>
+       * <code>.Employee.Date date = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          Schema.Employee.Date, Schema.Employee.Date.Builder, Schema.Employee.DateOrBuilder> 
           getDateFieldBuilder() {
         if (dateBuilder_ == null) {
           dateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+              Schema.Employee.Date, Schema.Employee.Date.Builder, Schema.Employee.DateOrBuilder>(
                   getDate(),
                   getParentForChildren(),
                   isClean());
@@ -891,6 +1469,11 @@ public final class Schema {
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Employee_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Employee_Date_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Employee_Date_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -901,9 +1484,10 @@ public final class Schema {
   static {
     java.lang.String[] descriptorData = {
       "\n\014schema.proto\032\037google/protobuf/timestam" +
-      "p.proto\"b\n\010Employee\022\016\n\006serial\030\001 \001(\005\022(\n\004d" +
-      "ate\030\002 \001(\0132\032.google.protobuf.Timestamp\022\014\n" +
-      "\004type\030\003 \001(\t\022\016\n\006values\030\004 \001(\005b\006proto3"
+      "p.proto\"\210\001\n\010Employee\022\016\n\006serial\030\001 \001(\005\022\034\n\004" +
+      "date\030\002 \001(\0132\016.Employee.Date\022\014\n\004type\030\003 \001(\t" +
+      "\022\016\n\006values\030\004 \001(\005\0320\n\004Date\022\014\n\004year\030\001 \001(\005\022\r" +
+      "\n\005month\030\002 \001(\005\022\013\n\003day\030\003 \001(\005b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -916,6 +1500,12 @@ public final class Schema {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Employee_descriptor,
         new java.lang.String[] { "Serial", "Date", "Type", "Values", });
+    internal_static_Employee_Date_descriptor =
+      internal_static_Employee_descriptor.getNestedTypes().get(0);
+    internal_static_Employee_Date_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_Employee_Date_descriptor,
+        new java.lang.String[] { "Year", "Month", "Day", });
     descriptor.resolveAllFeaturesImmutable();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
