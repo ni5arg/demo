@@ -39,7 +39,7 @@ public class CsvToProtobufConverter {
                     for(int i=0; i < values.length; i++) {
                         valueArray[i] = Integer.parseInt(values[i]);
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
 
@@ -124,7 +124,11 @@ public class CsvToProtobufConverter {
             else{
                 throw new dateException("Date is not in the past.");
             }
-        } catch (NumberFormatException e) {
+        } 
+        catch (dateException e){
+            e.printStackTrace();
+        }
+        catch (NumberFormatException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("format error");
