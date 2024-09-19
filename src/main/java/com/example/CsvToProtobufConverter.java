@@ -93,7 +93,6 @@ public class CsvToProtobufConverter {
                 System.out.println("Protobuf as JSON:");
                 System.out.println(jsonString);
             }
-
         }
     }
 
