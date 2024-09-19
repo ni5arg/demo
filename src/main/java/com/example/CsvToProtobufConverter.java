@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.Schema.Employee;
+import com.example.Schema.Employee.CalendarDate;
 import com.google.protobuf.Message;
 //import com.example.DeviceDataProto.DeviceData;
 import com.opencsv.CSVReader;
@@ -10,6 +11,7 @@ import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
@@ -17,56 +19,65 @@ import java.time.LocalDate;
 public class CsvToProtobufConverter {
 
     public static void main(String[] args) throws Exception {
+        // System.out.println(dateValidator("2024-09-15"));
+        // System.out.println(dateValidator("2024-09-19"));
+        // System.out.println(dateValidator("2024-09-23"));
+        // System.out.println(dateValidator("2024-10-15"));
+
+        // System.out.println(dateValidator("2023-09-15"));
+        // System.out.println(dateValidator("2025-09-19"));
         System.out.println(dateValidator("2024-09-15"));
-        System.out.println(dateValidator("2024-09-19"));
-        System.out.println(dateValidator("2024-09-23"));
-        System.out.println(dateValidator("2024-10-15"));
-
-        System.out.println(dateValidator("2023-09-15"));
-        System.out.println(dateValidator("2025-09-19"));
-
 
         String csvFile = "./test-data/Employee Data.txt";
 
+
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             reader.skip(1);//skip the header line
-
+            
             System.out.println("Read the csv file");
             
             String[] line;
+            
+
             while ((line = reader.readNext()) != null) {
                 
-                int serial = Integer.parseInt(line[0]);
-                //String[] date = line[1].split("-");
-                // LocalDate date = LocalDate.parse(line[1]);
-                // final Instant instant = java.sql.Timestamp.valueOf(date.atStartOfDay()).toInstant();        
-                // Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
-                dateValidator(line[1]);
+                String fullEntry = String.join(",", line);
+                System.out.println(fullEntry);
 
-                int age = Integer.parseInt(line[1]);
-                String email = line[2];
+                String valueString = fullEntry.substring(fullEntry.indexOf("[", 0)+1, fullEntry.indexOf("]", 0));
+                String[] values = valueString.split(",");
+                int[] valueArray = new int[values.length];
+                try {
+                    for(int i=0; i <= values.length; i++) {
+                        valueArray[i] = Integer.parseInt(values[i]);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                int serial = Integer.parseInt(line[0]);
+                int[] date = dateValidator(line[1]);
+                String type = line[2];
+                int[] finalValues = valueValidator(type, valueArray);
 
                 // Create User protobuf object
-                // Employee employee = Employee.newBuilder()
-                //                 .setSerial(serial)
-                //                 .setAge(age)
-                //                 .setEmail(email)
-                //                 .build();
+                CalendarDate dateExample =  CalendarDate.newBuilder()
+                                        .setYear(date[0])
+                                        .setMonth(date[1])
+                                        .setDay(date[2])
+                                        .build();
+
+                Employee employee = Employee.newBuilder()
+                                    .setSerial(serial)
+                                    .setDate(dateExample)
+                                    .setType(type)
+                                    .setValues(finalValues)
+                                    .build();
 
                 // users.add(user);
-            }
-            // for (String[] record : records) {
-            //     DeviceData deviceData = DeviceData.newBuilder()
-            //             .setSerial(record[0])
-            //             .setDate(record[1])
-            //             .setType(record[2])
-            //             .addAllValues(parseValues(record))
-            //             .build();
 
-            //     // Transmit deviceData as Protobuf
-            //     byte[] protobufData = deviceData.toByteArray();
-            //     sendToCloudService(protobufData);
-            // }
+            }
+
         }
     }
 
@@ -74,11 +85,40 @@ public class CsvToProtobufConverter {
     //     // Parse and return values as Float list
     // }
 
-    private static boolean dateValidator(String date) throws ParseException {
+    private static int[] valueValidator(String type, int[] values) {
         // TODO Auto-generated method stub
-        //return new SimpleDateFormat("yyyy-mm-dd").parse(date).compareTo(new Date()); // must be -1 for the date to be valid i.e in the past
-        //Date d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        return new SimpleDateFormat("yyyy-MM-dd").parse(date).before(new Date());
+        if(type == "Summary ") {
+            if(values.length != 3){
+                throw new java.lang.Error("Summary values are incorrect.");
+            }
+        }
+        else if (type == "Detail"){
+            if(values.length != 6){
+                throw new java.lang.Error("Detail values are incorrect.");
+            }
+        }
+        return values;
+    }
+
+    private static int[] dateValidator(String dateString) {
+        // TODO Auto-generated method stub
+
+        int[] date = new int[3];
+        try {
+            if (new SimpleDateFormat("yyyy-MM-dd").parse(dateString).before(new Date())){
+
+                date[0] = Integer.parseInt(dateString.split("-")[0]);
+                date[1] = Integer.parseInt(dateString.split("-")[1]);
+                date[2] = Integer.parseInt(dateString.split("-")[2]);
+            }
+        } catch (NumberFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return date;
     }
 
     private static void sendToCloudService(byte[] protobufData) {
