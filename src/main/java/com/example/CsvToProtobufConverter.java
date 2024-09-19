@@ -8,6 +8,7 @@ import com.opencsv.CSVReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
-import java.util.ArrayList; // import the ArrayList class
+import java.util.ArrayList;
 import com.google.protobuf.util.JsonFormat;  // For converting protobuf to JSON
 
 public class CsvToProtobufConverter {
@@ -27,6 +28,7 @@ public class CsvToProtobufConverter {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             reader.skip(1);//skip the header line
             
+            List<Employee> employees = new ArrayList<>();
             String[] line;
             while ((line = reader.readNext()) != null) {
                 
@@ -76,13 +78,17 @@ public class CsvToProtobufConverter {
                                     .addAllValues(list)
                                     .build();
 
+                employees.add(employee);
+
+                
+                
+
                 // Messaging
                 byte[] protobufData = employee.toByteArray();
                 sendToCloudService(protobufData);
 
                 try (FileOutputStream fos = new FileOutputStream("./outputData/protobuf")) {
                     fos.write(protobufData);
-                    //fos.close(); There is no more need for this line since you had created the instance of "fos" inside the try. And this will automatically close the OutputStream
                 }
 
                 //Sanity check
@@ -93,11 +99,19 @@ public class CsvToProtobufConverter {
                 System.out.println("Protobuf as JSON:");
                 System.out.println(jsonString);
             }
+
+            // Serialize entire batch protobuf messages to a binary file
+            for (Employee e : employees) {
+                byte[] protobufData = e.toByteArray();
+                try (FileOutputStream fos = new FileOutputStream("./outputData/" + e.getSerial() + ".bin")) {
+                    fos.write(protobufData);
+                }
+                //Files.write(Paths.get(e.getSerial() + ".bin"), protobufData);
+            }
         }
     }
 
     private static Integer[] valueValidator(String type, int[] values) {
-        // TODO Auto-generated method stub
         if(type == "Summary ") {
             if(values.length != 3){
                 throw new java.lang.Error("Summary values are incorrect.");
@@ -119,7 +133,6 @@ public class CsvToProtobufConverter {
     }
 
     private static int[] dateValidator(String dateString) throws dateException {
-        // TODO Auto-generated method stub
 
         int[] date = new int[3];
         try {
@@ -133,15 +146,10 @@ public class CsvToProtobufConverter {
                 throw new dateException("Date is not in the past.");
             }
         } 
-        // catch (dateException e){
-        //     e.printStackTrace();
-        // }
         catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("format error");
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("parsing error");
         }
@@ -149,6 +157,6 @@ public class CsvToProtobufConverter {
     }
 
     private static void sendToCloudService(byte[] protobufData) {
-        // Send data to cloud service via gRPC or HTTP
+        // Send data to cloud service
     }
 }

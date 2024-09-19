@@ -12,7 +12,7 @@ import com.google.protobuf.Message;
 public class ProtobufToJSONConverter {
 
     public static void main(String[] args) {
-        String binaryFilePath = "./outputData/protobuf";
+        String binaryFilePath = "./outputData/98765432.bin";
 
         try {
             // Step 1: Read the binary file and parse it to a User protobuf object
