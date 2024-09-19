@@ -67,12 +67,12 @@ public class CsvToProtobufConverter {
                                         .setDay(date[2])
                                         .build();
 
-                Employee employee = Employee.newBuilder()
-                                    .setSerial(serial)
-                                    .setDate(dateExample)
-                                    .setType(type)
-                                    .setValues(finalValues)
-                                    .build();
+                // Employee employee = Employee.newBuilder()
+                //                     .setSerial(serial)
+                //                     .setDate(dateExample)
+                //                     .setType(type)
+                //                     .setValues(finalValues)
+                //                     .build();
 
                 // users.add(user);
 
