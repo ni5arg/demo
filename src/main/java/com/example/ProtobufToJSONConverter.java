@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 
 import com.example.Schema.Employee;
-import com.example.Schema.Employee.CalendarDate;
-import com.google.protobuf.Message;
 import java.net.URL;
 
 public class ProtobufToJSONConverter {
